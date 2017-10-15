@@ -1,0 +1,18 @@
+<md-toolbar color="primary">
+    <span>{{title}}!</span>
+    <span *ngIf="router.url==='/login'">
+     <button md-button (click)="_appSer.showSignIn=!_appSer.showSignIn">
+        <span *ngIf="_appSer.showSignIn">Sign Up</span>
+        <span *ngIf="!_appSer.showSignIn">Sign In</span>
+     </button>
+    </span>  
+    <span  *ngIf="_appSer.logedInUserName && !(router.url=='/login')">
+        <span >{{_appSer.logedInUserName}}</span>
+        <button md-button (click)="SignOut()">Sign Out</button>
+    </span>
+</md-toolbar>
+
+
+      
+                <router-outlet></router-outlet>
+   

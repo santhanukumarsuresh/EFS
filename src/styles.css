@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Upright|Keania+One');
+
+md-toolbar-row {
+  justify-content: space-between;
+  font-family: 'Keania One', cursive; 
+  /* text-shadow: 4px 4px 4px #aaa; */
+}
+body {
+ margin: 0;
+ background: url(./images/green_cup.png);
+ color: #a5ab95;
+ /* font-family: Roboto, sans-serif; */
+ /* font-family: 'Keania One', cursive; */
+ /* font-family: 'Cormorant Upright', serif; */
+}

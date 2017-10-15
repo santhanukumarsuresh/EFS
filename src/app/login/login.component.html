@@ -1,0 +1,89 @@
+<div  fxLayout="row" class="login-form" fxLayoutAlign="center center">
+    <ngx-loading [show]="loading" ></ngx-loading>
+<md-card fxFlex="30%" class="signIn" align="center" *ngIf="_appSer.showSignIn" >
+  <md-card-header>
+      <md-card-title>Sign In</md-card-title>
+  </md-card-header>
+  <form [formGroup]="signInForm" (ngSubmit)="submitSignInMethod()">
+  <md-card-content>
+      <span  >
+      <md-input-container floatPlaceholder="auto"  >
+          <input name="signInUserName" mdInput  type="text"  formControlName="signInUserName" required #signInUserName
+                 placeholder="UserName" (keydown)="signInPsswrd=''" (keypress)="signInPsswrd=''">
+          <md-error >
+              <span *ngIf="signInUserName.value.length!=0 && signInUserName.value.length<3">UserName Must Be Atleast 3 characters</span>
+              <span *ngIf="signInUserName.value.length==0">UserName is Empty</span>
+              <span *ngIf="signInUserName.value.length>=3 && !signInUserName.value.match('/^([0-9]|[a-z])+([0-9a-z]+)$/i')">Special Characters Not Allowed</span>
+          </md-error>
+        </md-input-container>
+        <br/>
+        <md-input-container floatPlaceholder="auto">
+          <input mdInput [(ngModel)]="signInPsswrd" name="signInPassword" [readonly]="!signInUserName.value" type="password" required formControlName="signInPassword" #signInPassword
+          placeholder="Password">
+          <md-error >
+              <span *ngIf="signInPassword.value.length!=0 && signInPassword.value.length<6">Password Must Be Atleast 6 characters</span>
+              <span *ngIf="signInUserName.value && signInPassword.value.length==0">Password is Empty</span>
+              <span *ngIf="!signInUserName.value" fxLayoutAlign="end">User Name Not Provided</span>
+          </md-error>
+      </md-input-container>
+      <br/>   
+      
+      </span>
+     
+     
+  </md-card-content >
+  <md-card-actions class="btn-dwn"  align="end" >
+    <button md-raised-button color="primary" [disabled]="!signInForm.valid" >SignIn</button>
+  </md-card-actions>
+  
+</form>
+</md-card>
+
+
+<md-card fxFlex="30%" class="signUP" align="center" *ngIf="!_appSer.showSignIn" >
+  <md-card-header>
+    <md-card-title>Sign Up</md-card-title>
+  </md-card-header>
+  <form [formGroup]="signUpForm" (ngSubmit)="submitSignUpMethod()">
+  <div>
+    <md-card-content>
+      <md-input-container floatPlaceholder="auto" class="md-block">
+        <input name="signUpUserName" type="text" mdInput formControlName="signUpUserName" required placeholder="UserName" #signUpUserName
+        (keydown)="passwrd1=''" (keypress)="passwrd1=''">
+        <md-error >
+            <span *ngIf="signUpUserName.value.length!=0 && signUpUserName.value.length<3">UserName Must Be Atleast 3 characters</span>
+            <span *ngIf="signUpUserName.value.length==0">UserName is Empty</span>
+            <span *ngIf="signUpUserName.value.length>=3 && !signUpUserName.value.match('/^([0-9]|[a-z])+([0-9a-z]+)$/i')">Special Characters Not Allowed</span>
+        </md-error>
+      </md-input-container>
+      <br>
+      <md-input-container floatPlaceholder="auto" class="md-block">
+        <input name="signUpEmail" type="text" mdInput formControlName="signUpEmail" required placeholder="Email-Id" #signUpEmail>
+        <md-error >
+            <span *ngIf="signUpEmail.value.length==0">Please provide Email-Id</span>
+            <span *ngIf="signUpEmail.value && !isValidEmail">Please Provide Valid Email-Id</span>
+        </md-error>
+      </md-input-container>
+      <br>
+
+      <md-input-container  floatPlaceholder="auto" class="md-block">
+        <input [(ngModel)]="passwrd1"  [readonly]="!signUpUserName.value" name="signUpPassword" type="password" mdInput formControlName="signUpPassword" required placeholder="password" #signUpPassword>
+        <md-error  *ngIf="!signUpUserName.value" class="md-block"align="end">User Name Not Provided</md-error>
+        <md-error *ngIf="signUpUserName.value && signUpPassword.value.length<6">Password Must be Atleast 6 characters</md-error>
+      </md-input-container>
+      <br>
+      <md-input-container  floatPlaceholder="auto" class="md-block">
+        <input [(ngModel)]="passwrd2" [readonly]="!passwrd1" name="signUpCnfPassword" type="password" mdInput formControlName="signUpCnfPassword" required placeholder="Confirm password" #signUpCnfPassword>
+        <md-error *ngIf="passwrd1 && (signUpCnfPassword.value != signUpForm.value.signUpPassword)">Password misMatch</md-error>
+      </md-input-container>
+      <br>
+    </md-card-content>
+    <md-card-actions align="end"> 
+      <button md-raised-button [disabled]="!signUpForm.valid" color="primary">signUP</button>
+    </md-card-actions>
+  </div>
+  </form>
+</md-card>
+ </div>
+
+  

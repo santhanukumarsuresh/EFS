@@ -1,0 +1,12 @@
+
+.login-form md-card-title{
+    font-size: 30px;
+    color: #0a2094;
+    text-shadow: 11px 7px 12px rgba(42, 79, 160, 0.92);
+}
+.signIn {
+    margin-top:11%;
+}
+.signUP {
+    margin-top:7%;
+}

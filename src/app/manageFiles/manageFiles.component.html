@@ -1,0 +1,74 @@
+
+<div *ngIf="isAddFiles">
+               <!-- <div dragDrop
+                    [ngClass]="{'nv-file-over': dragDropzoneActive}"
+                    (filesHovered)="drogDropzoneState($event)"
+                    (filesDropped)="uploadDroppedFiles($event)"
+                    class="my-drop-zone">
+                   Drop Your Files
+                   <input [hidden]="true" id="input-file-id" multiple (change)="detectFiles($event)" type="file"/>
+                   <button onclick="document.getElementById('input-file-id').click()"  color="primary"  md-raised-button>Choose Files</button>   
+                </div>  -->
+                <input [hidden]="true" id="input-file-id" multiple (change)="detectFiles($event)" type="file"/>
+                <md-card class="filesCard" >
+                    <md-list>
+                        <h1 md-subheader class="title" >Selected Files</h1>
+                        <h3  *ngIf="selectedFileList.length == 0"> Click On Choose Files To Upload Selected File.</h3>
+                        <md-list-item *ngFor="let selectedFile of selectedFileList">
+                          <h4 class="files" *ngIf="selectedFile"  md-line>{{selectedFile.name}}</h4> 
+                          <button style="background-color: red;width: 40%;" md-raised-button (click)="removeSelectedFile(selectedFile)">Remove</button> &nbsp; &nbsp;   
+                          <button color="primary" md-raised-button (click)="upload(selectedFile)" style="width: 40%;">Upload</button> &nbsp; &nbsp;
+                        </md-list-item>
+                        <md-divider></md-divider>
+                        &nbsp;
+                        <div  fxLayout="row" fxLayoutAlign="space-around center" >
+                            <button   color="primary" onclick="document.getElementById('input-file-id').click()" style="background-color: #44D844;width: 40%;"  md-raised-button>Choose Files</button>&nbsp; &nbsp;
+                            <button [disabled]="selectedFileList.length == 0" style="background-color: red;width: 40%;" md-raised-button (click)="removeSelectedFile()">Remove All</button> &nbsp; &nbsp;   
+                            <button [disabled]="selectedFileList.length == 0" color="primary" md-raised-button (click)="uploadAll()" style="width: 40%;">Upload All</button> &nbsp; &nbsp;
+                          
+                            <button  style="background-color: rgba(30, 228, 178, 0.7);width: 40%;" (click)="toggleManageFile()" color="primary" md-raised-button>
+                              <span >Back To File List</span> 
+                            </button>
+                          </div>
+                      </md-list>
+                    </md-card>
+  </div>
+
+<div  fxLayout="row"  >
+<md-card class="filesCard" *ngIf="!isAddFiles"  fxFlex>
+<md-list>
+         <h1 md-subheader class="title">Files </h1> 
+         <h3  *ngIf="_appSer.fileList && _appSer.fileList.length == 0"> File List Is Empty. Click On Add Files To Upload Files.</h3>
+    <md-list-item *ngFor="let file of _appSer.fileList">
+      <h4 class="files" md-line>{{file.name}}<span *ngIf="file.isOnlyurl" style="color: #8310E0;"> sharedBy:{{file.sharedBy}}</span></h4>
+      
+      <button md-button  [mdMenuTriggerFor]="menuRef" style="background-color: honeydew;">
+          Share
+      </button>&nbsp; &nbsp;      
+      <md-menu #menuRef="mdMenu">
+          <button md-menu-item *ngFor="let item of _appSer.otherUserList "  (click)="this._fileUploadSer.shareUrl(item.fileName,file.url,file.name)">
+              <span >{{item.userName.split('@')[0]}}</span>
+          </button>
+      </md-menu>
+
+      <a href="{{file.url}}" md-raised-button color="primary">Download</a> &nbsp; &nbsp; 
+      <button color="warn" md-raised-button *ngIf="file.isOnlyurl" (click)="this._fileUploadSer.removeUrl(file.$key)">Remove</button> 
+      <button color="warn" md-raised-button *ngIf="!file.isOnlyurl" (click)="confirmDelete('Delete The File',file.$key)">Delete</button> &nbsp; &nbsp;
+    </md-list-item>
+    <md-divider></md-divider>
+    &nbsp;
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <button class="addButton"  (click)="toggleManageFile()" color="primary"  md-raised-button>
+          <span *ngIf="!isAddFiles">Add Files</span>  
+        </button>
+      </div>
+  </md-list>
+</md-card>
+</div>
+
+
+
+<!-- <input type="file" name="chooseFile"  placeholder="ChooseFile" multiple (change)="detectFiles($event)" #files>
+
+&nbsp;<button color="primary" md-raised-button  [disabled]="files.value.length == 0" (click)="upload()">upload</button> -->
+

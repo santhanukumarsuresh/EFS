@@ -1,0 +1,42 @@
+.example-card {
+    width: 400px;    width: 199px;
+    margin-left: 30px;
+    margin-top: 30px;
+    height: 182px;
+}
+  
+.mat-grid-tile{
+    background: #efdb2f;
+    color: rgb(57, 15, 226);
+}
+
+h4.files{
+    color: inherit;
+    font-size: 19px;
+    font-stretch: expanded;
+    font-family: cursive;
+}
+h1.title{
+    font-size: 36px;
+}
+.my-drop-zone { 
+    border: dotted 3px lightgray; 
+    background-color: inherit;
+    color: rgb(7, 255, 246);
+    text-align: center;
+}
+.nv-file-over { border: dotted 3px #4A00FF; } /* Default class applied to drop zones on over */
+
+
+.filesCard{
+    overflow: auto;
+    /* max-height: 465px; */
+    /* background-color: inherit; */
+    /* max-width: 912px; */
+    box-shadow: inset -17px 2px 9px 19px rgba(6, 6, 6, 0.43)!important;
+}
+
+.addButton{
+    background-color: limegreen;
+    width: 60%;
+}
